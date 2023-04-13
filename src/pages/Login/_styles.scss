@@ -1,0 +1,35 @@
+@use "../../scss/variables" as variables;
+@use "../../scss/functions" as functions;
+
+.page-login {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 functions.toRem(10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-login__footer {
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: functions.toRem(10);
+  }
+}
+
+.form-login {
+  width: 843px;
+  height: 587px;
+  padding: 0 functions.toRem(260);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: variables.$font-primary;
+}
+
+.form-login__inputs {
+  margin-bottom: functions.toRem(30);
+}

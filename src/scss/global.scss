@@ -1,0 +1,19 @@
+@use "./variables" as variables;
+@import "./typhography.scss";
+@import "./colors.scss";
+@import "./spaces.scss";
+@import "./grid.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: variables.$font-primary;
+}
+
+img {
+  max-width: 100%;
+}

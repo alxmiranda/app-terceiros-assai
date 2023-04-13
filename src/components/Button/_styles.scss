@@ -1,0 +1,128 @@
+@use "./../../scss/variables" as variables;
+@use "./../../scss/functions" as functions;
+
+.btn__spiner {
+  @keyframes spiner {
+    100% {
+      transform: rotate(365deg);
+      opacity: 1;
+    }
+  }
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-left: 2px solid transparent;
+  border-radius: 100px;
+  transform: rotate(0) translateX(0%);
+  animation: spiner 4s linear infinite;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: calc((50% - (20px / 2)));
+  top: calc((50% - (20px / 2)));
+}
+
+.btn {
+  color: variables.$primaryA;
+  font-family: variables.$font-primary;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: none;
+  display: block;
+  position: relative;
+
+  &:disabled {
+    background-color: variables.$backgroundStateDisabled;
+    border: none;
+    color: variables.$contentStateDisabled;
+    cursor: auto;
+  }
+
+  &.loading {
+    color: rgba(0, 0, 0, 1)!important;
+    .btn__spiner {
+      display: block;
+    }
+  }
+}
+
+.btn--primary {
+  background-color: variables.$backgroundInversePrimary;
+  color: variables.$contentInversePrimary;
+  transition: 0.5s;
+  
+  &:disabled {
+    color: variables.$contentStateDisabled;
+  }
+  &:not(:disabled):hover {
+    background-color: variables.$backgroundOverlayLight;
+  }
+}
+
+.btn--secondary {
+  background-color: variables.$backgroundTertiary;
+  color: variables.$contentPrimary;
+  transition: 0.5s;
+
+  &:not(:disabled):hover {
+    background-color: variables.$backgroundTertiary;
+    box-shadow: inset 0px 300px 0px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.btn--tertiary {
+  background-color: transparent;
+  color: variables.$contentPrimary;
+  transition: 0.5s;
+
+  &:not(:disabled):hover {
+    background-color: variables.$backgroundOverlayLight;
+    transition: 0.5s;
+    color: variables.$contentInversePrimary;
+    cursor: pointer;
+  }
+}
+
+.btn--danger {
+  background-color: transparent;
+  color: variables.$negative;
+  transition: 0.5s;
+
+  &:not(:disabled):hover {
+    background-color: variables.$borderNegative;
+    transition: 0.5s;
+    color: variables.$primaryA;
+    cursor: pointer;
+  }
+}
+
+.btn--sm {
+  padding: functions.toRem(10) functions.toRem(12);
+  font-size: functions.toRem(14);
+}
+.btn--md {
+  padding: functions.toRem(14) functions.toRem(16);
+  font-size: functions.toRem(16);
+}
+.btn--lg {
+  padding: functions.toRem(16) functions.toRem(20);
+  font-size: functions.toRem(18);
+}
+
+
+.button-group-wrapper {
+  display: flex;
+  // justify-content: ${({ flexContent }: any) => flexContent ? flexContent : 'flex-start'};
+  button:not(:last-of-type) {
+    margin-right: functions.toRem(10);
+  }
+
+  &.start {
+    justify-content: flex-start;
+  }
+  &.end {
+    justify-content: flex-end;
+  }
+}

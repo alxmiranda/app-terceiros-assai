@@ -1,0 +1,114 @@
+// Breakpoints
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400p;
+
+// Typhography
+$font-primary: "Open Sans", sans-serif;
+$font-weight-light: 100;
+$font-weight-regular: 300;
+$font-weight-medium: 500;
+$font-weight-bold: 800;
+
+//Foundation
+$primaryA: #000000;
+$primaryB: #ffffff;
+$accent: #276ef1;
+$negative: #e11900;
+$warning: #ffc043;
+$positive: #048848;
+
+//Background
+$backgroundPrimary: #ffffff;
+$backgroundInversePrimary: #000000;
+$backgroundSecondary: #f0f7ff;
+$backgroundTertiary: #eeeeee;
+$backgroundStateDisabled: #f9f9f9;
+$backgroundOverlayArt: #ffffff;
+$backgroundOverlayDark: rgba(0, 0, 0, 0.3);
+$backgroundOverlayLight: rgba(0, 0, 0, 0.7);
+$backgroundAccent: #276ef1;
+$backgroundNegative: #e11900;
+$backgroundWarning: #ffc043;
+$backgroundPositive: #048848;
+$backgroundLightAccent: #eff3fe;
+$backgroundLightNegative: #ffefed;
+$backgroundLightWarning: #fffaf0;
+$backgroundLightPositive: #e6f2ed;
+$backgroundAlwaysDark: #000000;
+$backgroundAlwaysLight: #ffffff;
+
+//Content
+$contentPrimary: #000000;
+$contentInversePrimary: #ffffff;
+$contentSecondary: #545454;
+$contentTertiary: #6b6b6b;
+$contentStateDisabled: #afafaf;
+$contentOnColor: #ffffff;
+$contentOnColorInverse: #000000;
+$contentAccent: #276ef1;
+$contentNegative: #e11900;
+$contentWarning: #996f00;
+$contentPositive: #048848;
+
+//Border
+$borderOpaque: #e2e2e2;
+$borderTransparent: rgba(0, 0, 0, 0.08);
+$borderSelected: #000000;
+$borderStateDisabled: #f6f6f6;
+$borderAccent: #276ef1;
+$borderAccentLight: #a0bff8;
+$borderNegative: #f1998e;
+$borderWarning: #ffe3ac;
+$borderPositive: #66d19e;
+
+// grid
+$grid-columns:                12 !default;
+$grid-gutter-width:           30px !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+// Starts at zero
+// Another grid mixin that ensures the min-width of the lowest breakpoint starts at 0.
+@mixin _assert-starts-at-zero($map) {
+  $values: map-values($map);
+  $first-value: nth($values, 1);
+  @if $first-value != 0 {
+    @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
+  }
+}
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);

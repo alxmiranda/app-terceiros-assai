@@ -1,0 +1,44 @@
+@use "./variables" as variables;
+@use "./functions" as functions;
+
+.mb-10 {
+  margin-bottom: functions.toRem(10);
+}
+
+.mb-20 {
+  margin-bottom: functions.toRem(20);
+}
+
+.mb-40 {
+  margin-bottom: functions.toRem(40);
+}
+
+.mt-10 {
+  margin-top: functions.toRem(10);
+}
+
+.mt-20 {
+  margin-top: functions.toRem(20);
+}
+
+.mt-40 {
+  margin-top: functions.toRem(40);
+}
+
+@media screen and (max-width: 575px) {
+  .mb-sm-10 {
+    margin-bottom: functions.toRem(10);
+  }
+  .mb-sm-20 {
+    margin-bottom: functions.toRem(20);
+  }
+}
+
+@media screen and (min-width: 575px) {
+  .mb-md-10 {
+    margin-bottom: functions.toRem(10);
+  }
+  .mb-md-20 {
+    margin-bottom: functions.toRem(20);
+  }
+}

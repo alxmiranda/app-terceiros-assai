@@ -1,0 +1,39 @@
+@use "./variables" as variables;
+
+// MAPINS
+$map-text-colors:
+  "white" variables.$contentInversePrimary,
+  "primary" variables.$contentPrimary,
+  "secondary" variables.$contentSecondary,
+  "tertiary" variables.$contentTertiary,
+  "disabled" variables.$contentStateDisabled,
+  "accent" variables.$contentAccent,
+  "positive" variables.$positive,
+  "negative" variables.$negative;
+
+$map-background-colors:
+  "primary" variables.$backgroundPrimary,
+  "secondary" variables.$backgroundSecondary,
+  "tertiary" variables.$backgroundTertiary,
+  "accent" variables.$backgroundAccent,
+  "warning" variables.$backgroundWarning,
+  "error" variables.$backgroundNegative,
+  "success" variables.$backgroundPositive,
+  "warning-light" variables.$backgroundLightWarning,
+  "error-light" variables.$backgroundLightNegative,
+  "success-light" variables.$backgroundLightPositive;
+
+
+// TEXT COLOR
+@each $name, $color in $map-text-colors {
+  .color-#{$name} {
+    color: #{$color};
+  }
+}
+
+// BACKGROUND COLOR
+@each $name, $color in $map-background-colors {
+  .bg-#{$name} {
+    background-color: #{$color};
+  }
+}

@@ -1,0 +1,59 @@
+@use "./variables" as variables;
+@use "./functions" as functions;
+@use "./mixins" as mixins;
+
+// MAPINGS
+$map-heading: "sm" 20 32, "md" 28 36, "lg" 36 44;
+
+$map-paragraph: "sm" 14 20, "md" 16 24, "lg" 18 28;
+
+$map-label: "sm" 14 16, "md" 16 20, "lg" 18 24;
+
+
+// HEADINGS
+.heading {
+  @include mixins.font-base-heading;
+}
+
+@each $sufix, $size, $line-height in $map-heading {
+  .heading--#{$sufix} {
+    font-size: functions.toRem($size);
+    line-height: functions.toRem($line-height);
+  }
+}
+
+// PARAGRAPH
+.paragraph {
+  @include mixins.font-base-paragraph;
+}
+
+@each $sufix, $size, $line-height in $map-paragraph {
+  .paragraph--#{$sufix} {
+    font-size: functions.toRem($size);
+    line-height: functions.toRem($line-height);
+  }
+}
+
+// LABEL
+.label {
+  @include mixins.font-base-label;
+}
+
+@each $sufix, $size, $line-height in $map-label {
+  .label--#{$sufix} {
+    font-size: functions.toRem($size);
+    line-height: functions.toRem($line-height);
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
