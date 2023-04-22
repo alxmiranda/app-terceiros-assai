@@ -1,0 +1,8 @@
+@use "../../scss/functions" as functions;
+
+.nav-start-servicos {
+  display: flex;
+  justify-content: flex-start;
+  gap: functions.toRem(10);
+  margin-top: functions.toRem(30);
+}

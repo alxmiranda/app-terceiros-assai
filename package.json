@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "html5-qrcode": "^2.3.8",
     "sass": "^1.61.0"
   }
 }

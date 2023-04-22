@@ -7,7 +7,7 @@ export const actionGetServicos: any = createAsyncThunk(
   async (params: IRequestGetServicos) => {
     const data = await servicos({
       dataIni: "2023-04-01",
-      dataFim: "2023-05-01",
+      dataFim: "2023-04-30",
       status: "",
     });
     return data;

@@ -6,6 +6,7 @@ import {
 import "./scss/global.scss"
 import PageLogin from "./pages/Login"
 import PageServicos from "./pages/Servicos";
+import RealizarServico from "./pages/RealizarServico";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/servicos",
     element: <PageServicos />
+  },
+  {
+    path: "/realizar-servico/:tipoServico",
+    element: <RealizarServico />
   }
 ]);
 

@@ -1,13 +1,38 @@
+import { IResponseGetServicos } from "../../../features/Servicos/types";
+import "./_styles.scss";
 interface IProps {
-  data: Array<any>;
+  data: Array<IResponseGetServicos>;
 }
 
 const ListServicos = ({ data }: IProps) => {
   return (
-    <div>
-      {data.map((item) => <div>ola</div>)}
+    <div className="list">
+      {data.map(
+        ({
+          status,
+          equipamento: {
+            tipoEquipamento: { nome, descricao },
+          },
+        }) => (
+          <article className="list__item">
+            <div className="container">
+              <div className="row">
+                <div className="info col-12">
+                  <p className={`paragraph--sm color-${status === "aberta" ? "negative" : "secondary"}`}>
+                    <strong>{status}</strong>
+                  </p>
+                  <p className="paragraph--sm color-secondary">
+                    <strong>Equipamento: </strong> {nome}
+                  </p>
+                  <p className="paragraph--sm color-secondary">{descricao}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        )
+      )}
     </div>
   );
 };
 
-export default ListServicos
+export default ListServicos;

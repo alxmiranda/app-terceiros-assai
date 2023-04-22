@@ -1,0 +1,5 @@
+@use "../../scss/functions" as functions;
+
+.base-layout__content {
+  padding: functions.toRem(20) 0;
+}

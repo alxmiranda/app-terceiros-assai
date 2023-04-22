@@ -1,0 +1,17 @@
+@use "../../../scss/functions" as functions;
+@use "../../../scss/variables" as variables;
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: functions.toRem(10);
+  margin-top: functions.toRem(20)
+}
+
+.list__item {
+  display: flex;
+  padding: functions.toRem(10) 0;
+  border: 1px solid variables.$backgroundTertiary;
+  border-radius: 4px;
+
+}
