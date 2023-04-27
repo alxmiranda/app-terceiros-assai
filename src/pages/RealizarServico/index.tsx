@@ -1,60 +1,84 @@
-import { useParams } from "react-router-dom";
-import {
-  Html5Qrcode,
-  Html5QrcodeResult,
-} from "html5-qrcode";
 import "./_styles.scss";
+import Modal from "../../components/Modal";
+import Button, { ButtonGroup } from "../../components/Button";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import BaseLayout from "../../components/BaseLayout";
 import React from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { actionGetPreventiva } from "../../features/Preventiva/GetPreventiva/slices";
+import { useParams } from "react-router-dom";
 
 const RealizarServico = () => {
-  const { tipoServico } = useParams();
-  let html5QrCode: any = null;
-  const [state, setState] = React.useState("");
-  const [loading, setLoading] = React.useState(true)
+  const dispatch = useAppDispatch();
+  const { etiqueta } = useParams();
+  const {
+    getPreventiva: { status, preventiva },
+  } = useAppSelector((state) => state);
 
-  const qrCodeSuccessCallback = (
-    decodedText: string,
-    decodedResult: Html5QrcodeResult
-  ) => {
-    setState(decodedText);
-  };
+  const OniniciarPreventiva = () => {
 
-  const qrCodeErrorCallback = (error: string) => console.log(error);
-
-  const start = () => {
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      qrCodeSuccessCallback,
-      qrCodeErrorCallback
-    );
-    setLoading(false)
-  };
-
-  const stop = () =>
-    html5QrCode
-      .stop()
-      .then(() => setState(""))
-      .catch((e: string) => console.log(e));
+  }
+  
+  const OnCancel = () => {
+    
+  }
 
   React.useEffect(() => {
-    html5QrCode = new Html5Qrcode("reader");
-    start()
+    dispatch(actionGetPreventiva(etiqueta));
   }, []);
 
-
+  if (!etiqueta) {
+    return (
+      <BaseLayout>
+        <h1>Não existe nenhuma preventiva com esse código</h1>
+      </BaseLayout>
+    );
+  }
+    
+  
+  if(status === "loading") {
+    return (
+      <BaseLayout>
+        <h1>carregando preventiva...</h1>
+      </BaseLayout>
+    );
+  }
+  
+  if(status === "failed") {
+    return (
+      <BaseLayout>
+        <h1>Algo deu errado</h1>
+      </BaseLayout>
+    );
+  }
+    
   return (
-    <div className="page-reader">
-      <div id="reader"></div>
-      {loading && <strong>carregando...</strong>}
-      {/* <nav className="nav">
-        <button className="btn-qr-code btn-start">Ler QR code</button>
-        <button className="btn-qr-code btn--outline btn-stop">
-          Cancelar Leitura
-        </button>
-        {state}
-      </nav> */}
-    </div>
+    <Modal
+      size="sm"
+      children={
+        <>
+          <p className="paragraph paragraph--sm mb-10"><strong>Gostaria de realizar a preventiva?</strong></p>
+          <p className="paragraph paragraph--sm">
+            <strong>Equipamento: </strong>
+            {preventiva?.equipamento?.tipoEquipamento?.nome}
+          </p>
+          <p className="paragraph paragraph--sm">
+            <strong>Assiduidade: </strong>
+            {preventiva.assiduidade}
+          </p>
+        </>
+      }
+      actions={
+        <ButtonGroup>
+          <Button size="md" variant="secondary" onClick={OnCancel}>
+            Não
+          </Button>
+          <Button size="md" variant="primary" onClick={OniniciarPreventiva}>
+            Sim
+          </Button>
+        </ButtonGroup>
+      }
+    ></Modal>
   );
 };
 

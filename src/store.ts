@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
-import sliceLogin from "./features/Login/slices"
-import sliceServocs from "./features/Servicos/slices"
+import getLogin from "./features/Login/slices"
+import getServicos from "./features/Servicos/slices"
+import getPreventiva from "./features/Preventiva/GetPreventiva/slices"
 
 export const store = configureStore({
   reducer: {
-    getLogin: sliceLogin,
-    getServicos: sliceServocs
+    getLogin,
+    getServicos,
+    getPreventiva
   }
 })
 

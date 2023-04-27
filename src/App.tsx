@@ -6,7 +6,9 @@ import {
 import "./scss/global.scss"
 import PageLogin from "./pages/Login"
 import PageServicos from "./pages/Servicos";
+import CapturarQRCode from "./pages/CapturarQRCode";
 import RealizarServico from "./pages/RealizarServico";
+import FinalizarServico from "./pages/FinalizarServico";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,16 @@ const router = createBrowserRouter([
     element: <PageServicos />
   },
   {
-    path: "/realizar-servico/:tipoServico",
+    path: "/capturar-qrcode/:tipoServico",
+    element: <CapturarQRCode />
+  },
+  {
+    path: "/realizar-servico/:etiqueta",
     element: <RealizarServico />
+  },
+  {
+    path: "/finalizar-servico",
+    element: <FinalizarServico />
   }
 ]);
 

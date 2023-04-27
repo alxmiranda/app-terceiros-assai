@@ -1,0 +1,44 @@
+.frame-video {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .btn-take-photo {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    border: none;
+    margin-top: 40px;
+
+    &,
+    &:before {
+      border-radius: 100%;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      border: 1px solid black;
+      width: 110%;
+      height: 110%;
+      opacity: .8;
+    }
+  }
+
+  video {
+    width: 100vw;
+    border: 1px solid black;
+    img{
+      display: none;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+}

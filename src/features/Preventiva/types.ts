@@ -1,10 +1,4 @@
-export interface IRequestGetServicos {
-  dataIni: string;
-  dataFim: string;
-  status: string;
-}
-
-export type IResponseGetServicos = {
+export type IResponseGetPreventiva = {
   id: number;
   idTipoEquipamento: number;
   idEquipamento: number;
@@ -20,7 +14,7 @@ export type IResponseGetServicos = {
   equipamento: {
     id: number;
     idTipoEquipamento: number;
-    idLocal: number;
+    idLocal: 13;
     idLoja: number;
     idUsuarioTerceiro: number;
     assiduidade: string;
@@ -36,14 +30,22 @@ export type IResponseGetServicos = {
   local: {
     id: number;
     nome: string;
-    descricao: string;
+    descricao: "-";
     ativo: number;
   };
-}
+  media: Array<any>;
+  tarefas: Array<{
+    id: number;
+    idEquipamento: number;
+    assiduidade: string;
+    descricao: string;
+    ativo: number;
+  }>;
+};
 
-export interface IInitialStateServicos {
-  servicos: Array<IResponseGetServicos> | [];
+
+export interface IInitialStateGetPreventiva {
+  preventiva: IResponseGetPreventiva;
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
-

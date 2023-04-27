@@ -1,0 +1,65 @@
+@use "./../../scss/variables" as variables;
+@use "./../../scss/functions" as functions;
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  padding: functions.toRem(10);
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  .actions {
+    display: flex;
+    gap: functions.toRem(10);
+  }
+}
+
+.modal__content {
+  width: 90%;
+  height: 90%;
+  background: variables.$primaryB;
+  padding: functions.toRem(24);
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+
+  header {
+    margin-bottom: functions.toRem(20);
+  }
+
+  section {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: functions.toRem(20);
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &.sm {
+    width: 480px;
+    height: 284px;
+  }
+
+  &.md {
+    max-width: 880px;
+    height: 484px;
+  }
+
+  @media screen and (min-width: variables.$md) {
+    header {
+      margin-bottom: functions.toRem(40);
+    }
+    .section {
+      padding: 0 functions.toRem(20);
+    }
+  }
+}

@@ -17,11 +17,11 @@ const PageServicos = () => {
 
   return (
     <BaseLayout>
-      <h2 className="heading--sm">Serviços</h2>
-      <nav className="nav-start-servicos">
-        <Link size="sm" to="/realizar-servico/preventiva" variant="primary">Iniciar Preventiva</Link>
-        <Link size="sm" to="/realizar-servico/correntiva" variant="secondary">Iniciar Corretiva</Link>
+      <nav className="nav-start-servicos mb-20">
+        <Link size="sm" to="/capturar-qrcode/preventiva" variant="primary">Iniciar Preventiva</Link>
+        <Link size="sm" to="/capturar-qrcode/correntiva" variant="secondary">Iniciar Corretiva</Link>
       </nav>
+      <h2 className="heading--sm">Serviços</h2>
       <ListServicos data={getServicos.servicos} />
     </BaseLayout>
   );
