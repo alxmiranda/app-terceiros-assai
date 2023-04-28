@@ -16,9 +16,7 @@ const CaptureImg = (refVideo, cb) => {
   const mediadevicesInit = () => {
     navigator.mediaDevices
       .getUserMedia({
-        video: {
-          facingMode: { exact: "environment" },
-        },
+        video: true
       })
       .then(gotStream)
       .catch((error) => {

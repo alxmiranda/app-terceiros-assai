@@ -6,33 +6,51 @@ import PhotosList from "./PhotosList";
 import BaseLayout from "../../components/BaseLayout";
 import Button from "../../components/Button";
 import Comment from "./Comment";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { actionPostMediaPreventiva } from "../../features/Preventiva/FinalizarServico/SendPhotos/slices";
+import { useParams } from "react-router-dom";
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 const FinalizarServico = () => {
   const [toggleTakePhoto, setToggleTakePhoto] = React.useState(true);
-  const [photos, setPhotos] = React.useState<Array<string>>(["", ""]);
+  const [photos, setPhotos] = React.useState<Array<any>>([]);
+  const dispatch = useAppDispatch();
+  const { postMediaPreventiva } = useAppSelector((state) => state);
+  const { idServico } = useParams();
 
   const getBlobPhoto = (blob) => {
-    setPhotos([...photos, URL.createObjectURL(blob)]);
-    setToggleTakePhoto(false);
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
+      var base64 = reader.result?.toString().split(",")[1];
+      setPhotos([...photos, { src: URL.createObjectURL(blob), blob: base64 }]);
+      setToggleTakePhoto(false);
+    };
   };
 
   const getOtherPhoto = () => setToggleTakePhoto(true);
 
   const removePhoto = (indice: number) => {
-    const copyPhotos = [...photos]
-    copyPhotos.splice(indice, 1)
-    setPhotos(copyPhotos)
-  }
+    const copyPhotos = [...photos];
+    copyPhotos.splice(indice, 1);
+    setPhotos(copyPhotos);
+  };
 
-  const sendPhotos = () => null
-  
+  const sendPhotos = () =>
+    dispatch(actionPostMediaPreventiva({ id: idServico, photos }));
+
   return (
     <>
-      {/* {toggleTakePhoto && <TakePhoto cb={getBlobPhoto} />} */}
-      {toggleTakePhoto && (
+      {toggleTakePhoto && <TakePhoto cb={getBlobPhoto} />}
+      {!toggleTakePhoto && (
         <BaseLayout>
-          <PhotosList photos={photos} removePhoto={removePhoto} />
-          <Comment />
+          {postMediaPreventiva.status !== "success" && (
+            <>
+            <PhotosList photos={photos} removePhoto={removePhoto} />
+            <p className="paragraph paragraph--sm color-danger"><strong>{postMediaPreventiva.feedbackError}</strong></p>
+            </>
+          )}
+          {postMediaPreventiva.status === "success" && <Comment />}
           <nav className="controlls">
             <Button
               size="sm"
@@ -43,11 +61,7 @@ const FinalizarServico = () => {
               Tirar uma nova foto
             </Button>
 
-            <Button
-              size="sm"
-              variant="primary"
-              onClick={getOtherPhoto}
-            >
+            <Button size="sm" variant="primary" onClick={sendPhotos}>
               Enviar fotos
             </Button>
           </nav>

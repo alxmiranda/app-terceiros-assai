@@ -44,10 +44,19 @@ export type IResponseGetPreventiva = {
 };
 
 export interface IRequestPutIniciarPreventiva {
-  id: string | number,
-  etiqueta: string | undefined
+  id: string | number;
+  etiqueta: string | undefined;
 }
 
+export interface IRequestPostMediaPreventiva {
+  id: string | number | undefined;
+  photos: Array<{
+    idServico?: number;
+    // tipoArquivo: "string";
+    // base64Image: "string";
+    blob: Blob
+  }>;
+}
 
 export interface IInitialStateGetPreventiva {
   preventiva: IResponseGetPreventiva;
@@ -56,6 +65,11 @@ export interface IInitialStateGetPreventiva {
 }
 
 export interface IInitialStatePutIniciarPreventiva {
+  status: "" | "success" | "failed" | "loading";
+  feedbackError?: any;
+}
+
+export interface IInitialStatePutMediasPreventiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }

@@ -1,3 +1,4 @@
+import Button, { Link } from "../../../components/Button";
 import { IResponseGetServicos } from "../../../features/Servicos/types";
 import "./_styles.scss";
 interface IProps {
@@ -9,6 +10,7 @@ const ListServicos = ({ data }: IProps) => {
     <div className="list">
       {data.map(
         ({
+          id,
           status,
           equipamento: {
             tipoEquipamento: { nome, descricao },
@@ -18,7 +20,9 @@ const ListServicos = ({ data }: IProps) => {
             <div className="container">
               <div className="row">
                 <div className="info col-12">
-                  <p className={`paragraph--sm color-${status === "aberta" ? "negative" : "secondary"}`}>
+                  <p
+                    className={`paragraph--sm color-secondary`}
+                  >
                     <strong>{status}</strong>
                   </p>
                   <p className="paragraph--sm color-secondary">
@@ -27,6 +31,15 @@ const ListServicos = ({ data }: IProps) => {
                   <p className="paragraph--sm color-secondary">{descricao}</p>
                 </div>
               </div>
+              {status === "iniciada" && (
+                <div className="row mt-10">
+                  <div className="col-6">
+                    <Link size="sm" variant="secondary" to={`/finalizar-servico/${id}`}>
+                      Finalziar Serviço
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </article>
         )

@@ -44,7 +44,8 @@ const request = async (options: IOptions) => {
     }
 
     if (error.response.status === 400) {
-      throw new Error("Algo deu errado, tente novamente!")
+      console.log(error)
+      throw new Error(error.response.data || "Algo deu errado")
     }
 
     if (error.response.status === 401) {

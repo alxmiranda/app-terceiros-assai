@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element: <RealizarServico />
   },
   {
-    path: "/finalizar-servico",
+    path: "/finalizar-servico/:idServico",
     element: <FinalizarServico />
   }
 ]);
