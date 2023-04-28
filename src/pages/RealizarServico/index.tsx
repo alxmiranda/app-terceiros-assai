@@ -6,26 +6,31 @@ import BaseLayout from "../../components/BaseLayout";
 import React from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { actionGetPreventiva } from "../../features/Preventiva/GetPreventiva/slices";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { actionPutInciarPreventiva } from "../../features/Preventiva/IniciarPreventiva/slices";
 
 const RealizarServico = () => {
   const dispatch = useAppDispatch();
-  const { etiqueta } = useParams();
+  const navigate = useNavigate();
+  const { etiqueta, tipoServico } = useParams();
   const {
     getPreventiva: { status, preventiva },
+    putIniciarPreventiva,
   } = useAppSelector((state) => state);
 
-  const OniniciarPreventiva = () => {
+  const OniniciarPreventiva = () => dispatch(actionPutInciarPreventiva({ id: preventiva.id, etiqueta }));
 
-  }
-  
-  const OnCancel = () => {
-    
-  }
+  const OnCancel = () => navigate(`/capturar-qrcode/${tipoServico}`);
 
   React.useEffect(() => {
     dispatch(actionGetPreventiva(etiqueta));
   }, []);
+
+  React.useEffect(() => {
+    if (putIniciarPreventiva.status === "success") {
+      navigate("/servicos");
+    }
+  }, [putIniciarPreventiva.status]);
 
   if (!etiqueta) {
     return (
@@ -34,30 +39,31 @@ const RealizarServico = () => {
       </BaseLayout>
     );
   }
-    
-  
-  if(status === "loading") {
+
+  if (status === "loading") {
     return (
       <BaseLayout>
         <h1>carregando preventiva...</h1>
       </BaseLayout>
     );
   }
-  
-  if(status === "failed") {
+
+  if (status === "failed") {
     return (
       <BaseLayout>
         <h1>Algo deu errado</h1>
       </BaseLayout>
     );
   }
-    
+
   return (
     <Modal
       size="sm"
       children={
         <>
-          <p className="paragraph paragraph--sm mb-10"><strong>Gostaria de realizar a preventiva?</strong></p>
+          <p className="paragraph paragraph--sm mb-10">
+            <strong>Gostaria de realizar a preventiva?</strong>
+          </p>
           <p className="paragraph paragraph--sm">
             <strong>Equipamento: </strong>
             {preventiva?.equipamento?.tipoEquipamento?.nome}

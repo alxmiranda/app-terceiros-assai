@@ -35,7 +35,9 @@ $map-label: "sm" 14 16, "md" 16 20, "lg" 18 24;
 }
 
 // LABEL
-.label {
+.label,
+input,
+textarea {
   @include mixins.font-base-label;
 }
 
@@ -52,6 +54,10 @@ $map-label: "sm" 14 16, "md" 16 20, "lg" 18 24;
 
 .text-left {
   text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text-uppercase {

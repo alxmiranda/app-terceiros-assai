@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <CapturarQRCode />
   },
   {
-    path: "/realizar-servico/:etiqueta",
+    path: "/realizar-servico/:tipoServico/:etiqueta",
     element: <RealizarServico />
   },
   {

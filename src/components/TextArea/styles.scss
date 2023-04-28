@@ -1,0 +1,58 @@
+@use "../../scss/variables" as variables;
+
+.input-wrapper {
+  font-family: variables.$font-primary;
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+}
+.input-wrapper .input {
+  border: 2px solid transparent;
+  overflow: hidden;
+  background-color: variables.$backgroundTertiary;
+  padding: 5px 10px;
+  color: variables.$contentPrimary;
+
+  &:not(:disabled):hover {
+    background-color: variables.$backgroundTertiary;
+    box-shadow: inset 0px 300px 0px rgba(0, 0, 0, 0.08);
+  }
+
+  &:focus,
+  &:focus-visible {
+    border-color: variables.$borderSelected;
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: variables.$backgroundStateDisabled;
+    border: none;
+    color: variables.$contentStateDisabled;
+  }
+}
+.input {
+  &--sm {
+    height: 36px;
+    font-size: 14px;
+  }
+  &--md {
+    height: 48px;
+    font-size: 16px;
+  }
+  &--lg {
+    height: 56px;
+    font-size: 18px;
+  }
+  &--error {
+    border: 2px solid variables.$borderNegative;
+    background-color: variables.$backgroundLightNegative;
+  }
+
+}
+span {
+  font-size: 14px;
+  color: variables.$contentTertiary;
+}

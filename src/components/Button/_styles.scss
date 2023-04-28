@@ -38,6 +38,7 @@
     border: none;
     color: variables.$contentStateDisabled;
     cursor: auto;
+    pointer-events: none;
   }
 
   &.loading {

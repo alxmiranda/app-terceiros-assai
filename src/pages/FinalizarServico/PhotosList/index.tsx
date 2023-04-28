@@ -1,12 +1,14 @@
+import Button from "../../../components/Button";
 import "./_styles.scss"
 
-const PhotosList = ({ photos }) => {
+const PhotosList = ({ photos, removePhoto }) => {
   return (
     <div className="list-photos">
-      {photos.map((src) => (
+      <p className="paragraph paragraph--sm color-accent text-right">{photos.length}/4</p>
+      {photos.map((src, indice) => (
         <div className="list-photos__item">
           <img src={src} alt="" />
-          <button className="btn btn--sm">excluir</button>
+          <Button size="sm" variant="danger" onClick={() => removePhoto(indice)}>excluir</Button>
         </div>
       ))}
     </div>

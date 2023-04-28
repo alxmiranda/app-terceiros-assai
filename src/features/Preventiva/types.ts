@@ -43,9 +43,19 @@ export type IResponseGetPreventiva = {
   }>;
 };
 
+export interface IRequestPutIniciarPreventiva {
+  id: string | number,
+  etiqueta: string | undefined
+}
+
 
 export interface IInitialStateGetPreventiva {
   preventiva: IResponseGetPreventiva;
+  status: "" | "success" | "failed" | "loading";
+  feedbackError?: any;
+}
+
+export interface IInitialStatePutIniciarPreventiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }

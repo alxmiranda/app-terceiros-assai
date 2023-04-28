@@ -22,7 +22,7 @@ const RealizarServico = () => {
     decodedText: string,
     decodedResult: Html5QrcodeResult
   ) => {
-    navigate(`/realizar-servico/${decodedText}`)
+    navigate(`/realizar-servico/${tipoServico}/${decodedText}`)
   };
 
   const qrCodeErrorCallback = (error: string) => console.log(error);
