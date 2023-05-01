@@ -34,8 +34,8 @@ const ListServicos = ({ data }: IProps) => {
               {status === "iniciada" && (
                 <div className="row mt-10">
                   <div className="col-6">
-                    <Link size="sm" variant="secondary" to={`/finalizar-servico/${id}`}>
-                      Finalziar Serviço
+                    <Link size="sm" variant="secondary" to={`/capturar-qrcode/finalizar/${id}`}>
+                      Finalizar Serviço
                     </Link>
                   </div>
                 </div>

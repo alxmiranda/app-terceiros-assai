@@ -73,3 +73,14 @@ export interface IInitialStatePutMediasPreventiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
+
+export interface IInitialStatePutFinalizarPreventiva {
+  status: "" | "success" | "failed" | "loading";
+  feedbackError?: any;
+}
+
+export interface IRequestPutFinalizarPreventiva {
+  id: string | number | undefined;
+  etiqueta: string;
+  observacoes: string
+}

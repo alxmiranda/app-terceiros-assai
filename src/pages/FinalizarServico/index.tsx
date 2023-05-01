@@ -17,7 +17,7 @@ const FinalizarServico = () => {
   const dispatch = useAppDispatch();
   const { postMediaPreventiva } = useAppSelector((state) => state);
   const { idServico } = useParams();
-
+  console.log(useParams());
   const getBlobPhoto = (blob) => {
     var reader = new FileReader();
     reader.readAsDataURL(blob);
@@ -41,30 +41,39 @@ const FinalizarServico = () => {
 
   return (
     <>
+      {toggleTakePhoto && (
+        <BaseLayout>
+          <strong>Você pode tirar até 4 fotos para finalizar o serviço</strong>
+        </BaseLayout>
+      )}
       {toggleTakePhoto && <TakePhoto cb={getBlobPhoto} />}
       {!toggleTakePhoto && (
         <BaseLayout>
           {postMediaPreventiva.status !== "success" && (
             <>
-            <PhotosList photos={photos} removePhoto={removePhoto} />
-            <p className="paragraph paragraph--sm color-danger"><strong>{postMediaPreventiva.feedbackError}</strong></p>
+              <PhotosList photos={photos} removePhoto={removePhoto} />
+              <p className="paragraph paragraph--sm color-negative">
+                <strong>{postMediaPreventiva.feedbackError}</strong>
+              </p>
             </>
           )}
           {postMediaPreventiva.status === "success" && <Comment />}
-          <nav className="controlls">
-            <Button
-              size="sm"
-              variant="secondary"
-              onClick={getOtherPhoto}
-              disabled={photos.length === 4}
-            >
-              Tirar uma nova foto
-            </Button>
+          {postMediaPreventiva.status !== "success" && (
+            <nav className="controlls">
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={getOtherPhoto}
+                disabled={photos.length === 4}
+              >
+                Tirar uma nova foto
+              </Button>
 
-            <Button size="sm" variant="primary" onClick={sendPhotos}>
-              Enviar fotos
-            </Button>
-          </nav>
+              <Button size="sm" variant="primary" onClick={sendPhotos}>
+                Enviar fotos
+              </Button>
+            </nav>
+          )}
         </BaseLayout>
       )}
     </>

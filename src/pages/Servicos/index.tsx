@@ -18,8 +18,8 @@ const PageServicos = () => {
   return (
     <BaseLayout>
       <nav className="nav-start-servicos mb-20">
-        <Link size="sm" to="/capturar-qrcode/preventiva" variant="primary">Iniciar Preventiva</Link>
-        <Link size="sm" to="/capturar-qrcode/correntiva" variant="secondary">Iniciar Corretiva</Link>
+        <Link size="sm" to="/capturar-qrcode/iniciar-preventiva" variant="primary">Iniciar Preventiva</Link>
+        <Link size="sm" to="/capturar-qrcode/iniciar-correntiva" variant="secondary">Iniciar Corretiva</Link>
       </nav>
       <h2 className="heading--sm">Serviços</h2>
       <ListServicos data={getServicos.servicos} />

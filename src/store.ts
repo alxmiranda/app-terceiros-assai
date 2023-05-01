@@ -4,6 +4,7 @@ import getServicos from "./features/Servicos/slices"
 import getPreventiva from "./features/Preventiva/GetPreventiva/slices"
 import putIniciarPreventiva from "./features/Preventiva/IniciarPreventiva/slices"
 import postMediaPreventiva from "./features/Preventiva/FinalizarServico/SendPhotos/slices"
+import putFinalizarPreventiva from "./features/Preventiva/FinalizarServico/slices"
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     getPreventiva,
     putIniciarPreventiva,
     postMediaPreventiva,
+    putFinalizarPreventiva
   }
 })
 

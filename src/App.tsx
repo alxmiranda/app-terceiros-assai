@@ -23,12 +23,16 @@ const router = createBrowserRouter([
     path: "/capturar-qrcode/:tipoServico",
     element: <CapturarQRCode />
   },
+    {
+    path: "/capturar-qrcode/:tipoServico/:idServico",
+    element: <CapturarQRCode />
+  },
   {
     path: "/realizar-servico/:tipoServico/:etiqueta",
     element: <RealizarServico />
   },
   {
-    path: "/finalizar-servico/:idServico",
+    path: "/finalizar-servico/:idServico/:etiqueta",
     element: <FinalizarServico />
   }
 ]);

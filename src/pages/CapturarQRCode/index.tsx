@@ -8,21 +8,25 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { actionGetPreventiva } from "../../features/Preventiva/GetPreventiva/slices";
 import Modal from "../../components/Modal";
 
-const RealizarServico = () => {
+const CapturarQRCode = () => {
   let html5QrCode: any = null;
   const navigate = useNavigate()
   const {
     getPreventiva: { status },
   } = useAppSelector((state) => state);
 
-  const { tipoServico } = useParams();
+  const { tipoServico, idServico } = useParams();
   const [loading, setLoading] = React.useState(true);
 
   const qrCodeSuccessCallback = (
     decodedText: string,
     decodedResult: Html5QrcodeResult
   ) => {
-    navigate(`/realizar-servico/${tipoServico}/${decodedText}`)
+    if(tipoServico === "finalizar") {
+      navigate(`/finalizar-servico/${idServico}/${decodedText}`)
+    } else {
+      navigate(`/realizar-servico/${tipoServico}/${decodedText}`)
+    }
   };
 
   const qrCodeErrorCallback = (error: string) => console.log(error);
@@ -40,6 +44,7 @@ const RealizarServico = () => {
   React.useEffect(() => {
     html5QrCode = new Html5Qrcode("reader");
     start();
+    return () => html5QrCode.stop()
   }, []);
 
   return (
@@ -57,4 +62,4 @@ const RealizarServico = () => {
   );
 };
 
-export default RealizarServico;
+export default CapturarQRCode;
