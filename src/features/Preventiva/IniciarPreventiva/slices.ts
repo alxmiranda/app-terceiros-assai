@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { IInitialStatePutIniciarPreventiva, IRequestPutIniciarPreventiva } from "../types";
+import {
+  IInitialStatePutIniciarPreventiva,
+  IRequestPutIniciarPreventiva,
+} from "../types";
 import putIniciarPreventiva from "./services";
 
 export const actionPutInciarPreventiva = createAsyncThunk(
@@ -16,7 +19,12 @@ const putIniciarPreventivaSlice = createSlice({
     status: "",
     feedbackError: "",
   } as IInitialStatePutIniciarPreventiva,
-  reducers: {},
+  reducers: {
+    actionResetPutInciarPreventiva: (state) => {
+      state.status = "";
+      state.feedbackError = "";
+    },
+  },
   extraReducers: {
     [`${actionPutInciarPreventiva.pending}`]: (state) => {
       state.status = "loading";
@@ -32,3 +40,5 @@ const putIniciarPreventivaSlice = createSlice({
 });
 
 export default putIniciarPreventivaSlice.reducer;
+export const { actionResetPutInciarPreventiva } =
+  putIniciarPreventivaSlice.actions;

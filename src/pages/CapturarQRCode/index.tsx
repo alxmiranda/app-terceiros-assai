@@ -3,18 +3,11 @@ import { Html5Qrcode, Html5QrcodeResult } from "html5-qrcode";
 import "./_styles.scss";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { actionGetPreventiva } from "../../features/Preventiva/GetPreventiva/slices";
-import Modal from "../../components/Modal";
 
 const CapturarQRCode = () => {
   let html5QrCode: any = null;
-  const navigate = useNavigate()
-  const {
-    getPreventiva: { status },
-  } = useAppSelector((state) => state);
-
+  const navigate = useNavigate();
+  
   const { tipoServico, idServico } = useParams();
   const [loading, setLoading] = React.useState(true);
 
@@ -22,10 +15,10 @@ const CapturarQRCode = () => {
     decodedText: string,
     decodedResult: Html5QrcodeResult
   ) => {
-    if(tipoServico === "finalizar") {
-      navigate(`/finalizar-servico/${idServico}/${decodedText}`)
+    if (tipoServico === "finalizar") {
+      navigate(`/finalizar-servico/${idServico}/${decodedText}`);
     } else {
-      navigate(`/realizar-servico/${tipoServico}/${decodedText}`)
+      navigate(`/realizar-servico/${tipoServico}/${decodedText}`);
     }
   };
 
@@ -44,20 +37,18 @@ const CapturarQRCode = () => {
   React.useEffect(() => {
     html5QrCode = new Html5Qrcode("reader");
     start();
-    return () => html5QrCode.stop()
+    return () => html5QrCode.stop();
   }, []);
 
   return (
     <div className="page-reader">
       <div id="reader"></div>
       {loading && <strong>carregando...</strong>}
-      {status !== "success" && (
-        <div className="container">
-          <h1 className="heading--sm">
-            Aponte a camera para a etiqueta no equipamento
-          </h1>
-        </div>
-      )}
+      <div className="container">
+        <h1 className="heading--sm">
+          Aponte a camera para a etiqueta no equipamento
+        </h1>
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import React from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { actionGetPreventiva } from "../../features/Preventiva/GetPreventiva/slices";
 import { useNavigate, useParams } from "react-router-dom";
-import { actionPutInciarPreventiva } from "../../features/Preventiva/IniciarPreventiva/slices";
+import { actionPutInciarPreventiva, actionResetPutInciarPreventiva } from "../../features/Preventiva/IniciarPreventiva/slices";
 
 const RealizarServico = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +22,8 @@ const RealizarServico = () => {
 
   const OnCancel = () => navigate(`/capturar-qrcode/${tipoServico}`);
 
+  const OnReset:any = () => dispatch(actionResetPutInciarPreventiva())
+
   React.useEffect(() => {
     dispatch(actionGetPreventiva(etiqueta));
   }, []);
@@ -31,6 +33,10 @@ const RealizarServico = () => {
       navigate("/servicos");
     }
   }, [putIniciarPreventiva.status]);
+
+  React.useEffect(() => {
+    return () => OnReset()
+  }, []) 
 
   if (!etiqueta) {
     return (
