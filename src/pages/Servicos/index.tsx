@@ -5,24 +5,46 @@ import BaseLayout from "../../components/BaseLayout";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import ListServicos from "./ListServicos";
 import "./_styles.scss";
-import { Link } from "../../components/Button";
+import { Link } from "react-router-dom";
+import { BsCamera } from "react-icons/bs";
+import Select from "../../components/Select";
 
 const PageServicos = () => {
   const dispatch = useAppDispatch();
-  const { getServicos } = useAppSelector((state) => state);
   
-  React.useEffect(() => {
-    dispatch(actionGetServicos());
-  }, []);
+  const onChange = (ev) => {
+    dispatch(actionGetServicos({ tipoServico: ev.target.value }));
+  };
 
   return (
     <BaseLayout>
       <nav className="nav-start-servicos mb-20">
-        <Link size="sm" to="/capturar-qrcode/iniciar-preventiva" variant="primary">Iniciar Preventiva</Link>
-        <Link size="sm" to="/capturar-qrcode/iniciar-correntiva" variant="secondary">Iniciar Corretiva</Link>
+        <Link to="/iniciar/capturar-qrcode/preventiva">
+          <BsCamera />
+          <span>Iniciar Preventiva</span>
+        </Link>
+        <Link to="/iniciar/capturar-qrcode/corretiva">
+          <BsCamera />
+          <span>Iniciar Corretiva</span>
+        </Link>
       </nav>
-      <h2 className="heading--sm">Serviços</h2>
-      <ListServicos data={getServicos.servicos} />
+      <div className="row">
+        <div className="col-6">
+          <h2 className="heading--sm">Serviços</h2>
+        </div>
+        <div className="col-6">
+          <Select
+            onChange={onChange}
+            size="sm"
+            label="Escolha o tipo de seriço"
+            options={[
+              { value: "preventiva", children: "preventiva" },
+              { value: "corretiva", children: "corretiva" },
+            ]}
+          />
+        </div>
+      </div>
+      <ListServicos />
     </BaseLayout>
   );
 };

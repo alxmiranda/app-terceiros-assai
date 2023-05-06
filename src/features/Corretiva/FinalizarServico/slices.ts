@@ -1,34 +1,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import putFinalizarPreventiva from "./services";
 import {
-  IInitialStatePutFinalizarPreventiva,
-  IRequestPutFinalizarPreventiva,
+  IInitialStatePutFinalizarCorretiva,
+  IRequestPutFinalizarCorretiva,
 } from "../types";
 
-export const actionPutFinalizarPreventiva = createAsyncThunk(
+export const actionPutFinalizarCorretiva = createAsyncThunk(
   "PUT_FINALIZAR_PREVENTIVA",
-  async (data: IRequestPutFinalizarPreventiva) => {
+  async (data: IRequestPutFinalizarCorretiva) => {
     const result = await putFinalizarPreventiva(data);
     
     return result;
   }
 );
 
-const putFinalizarPreventivaSlice = createSlice({
+const putFinalizarCorretivaSlice = createSlice({
   name: "PUT_FINALIZAR_PREVENTIVA",
   initialState: {
     status: "",
     feedbackError: "",
-  } as IInitialStatePutFinalizarPreventiva,
+  } as IInitialStatePutFinalizarCorretiva,
   reducers: {},
   extraReducers: {
-    [`${actionPutFinalizarPreventiva.pending}`]: (state) => {
+    [`${actionPutFinalizarCorretiva.pending}`]: (state) => {
       state.status = "loading";
     },
-    [`${actionPutFinalizarPreventiva.fulfilled}`]: (state, { payload }) => {
+    [`${actionPutFinalizarCorretiva.fulfilled}`]: (state) => {
       state.status = "success";
     },
-    [`${actionPutFinalizarPreventiva.rejected}`]: (state, payload) => {
+    [`${actionPutFinalizarCorretiva.rejected}`]: (state, payload) => {
       
       state.status = "failed";
       state.feedbackError = payload.error.message;
@@ -36,4 +36,4 @@ const putFinalizarPreventivaSlice = createSlice({
   },
 });
 
-export default putFinalizarPreventivaSlice.reducer;
+export default putFinalizarCorretivaSlice.reducer;

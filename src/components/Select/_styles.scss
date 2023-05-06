@@ -1,0 +1,60 @@
+@use "../../scss/variables" as variables;
+
+.select-wrapper {
+  font-family: variables.$font-primary;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-basis: 100%;
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+}
+
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: 0;
+  border: 0;
+  background: variables.$backgroundTertiary url("../../assets/chevron.svg") no-repeat center right;
+  background-size: 16px;
+  background-position-x: 96%;
+  padding: 0px 0px 0px 16px;
+  cursor: pointer;
+  transition: 0.5s;
+  color: variables.$contentTertiary;
+
+  &:not(:disabled):hover {
+    background-color: variables.$backgroundTertiary;
+    box-shadow: inset 999px 999px 0px rgba(0, 0, 0, 0.08);
+    opacity: 1;
+  }
+
+  &:active {
+    border: 2px solid variables.$contentPrimary;
+    color: variables.$contentPrimary;
+    // transition: 0.2s;
+  }
+  &:disabled {
+    background-color: variables.$backgroundStateDisabled;
+    border: none;
+    color: variables.$contentStateDisabled;
+    cursor: auto;
+  }
+}
+.select-sm {
+  height: 36px;
+  font-size: 14px;
+}
+.select-md {
+  height: 48px;
+  font-size: 16px;
+}
+.select-lg {
+  height: 56px;
+  font-size: 18px;
+}
+.select-span {
+  color: variables.$contentTertiary;
+}

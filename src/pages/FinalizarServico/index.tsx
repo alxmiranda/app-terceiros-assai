@@ -10,13 +10,15 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { actionPostMediaPreventiva } from "../../features/Preventiva/FinalizarServico/SendPhotos/slices";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../hooks/useAppSelector";
+import { actionPostMediaCorretiva } from "../../features/Corretiva/FinalizarServico/SendPhotos/slices";
 
 const FinalizarServico = () => {
   const [toggleTakePhoto, setToggleTakePhoto] = React.useState(true);
   const [photos, setPhotos] = React.useState<Array<any>>([]);
   const dispatch = useAppDispatch();
-  const { postMediaPreventiva } = useAppSelector((state) => state);
-  const { idServico } = useParams();
+  const { postMediaPreventiva, postMediaCorretiva } = useAppSelector((state) => state);
+  const { idServico, tipoServico } = useParams();
+
   console.log(useParams());
   const getBlobPhoto = (blob) => {
     var reader = new FileReader();
@@ -36,20 +38,24 @@ const FinalizarServico = () => {
     setPhotos(copyPhotos);
   };
 
-  const sendPhotos = () =>
-    dispatch(actionPostMediaPreventiva({ id: idServico, photos }));
+  const sendPhotos = () => {
+    if (!tipoServico) return null;
+    const dataPhotos = { id: idServico, photos };
+    const conditionalsToSendPhotos = {
+      preventiva: () => dispatch(actionPostMediaPreventiva(dataPhotos)),
+      corretiva: () => dispatch(actionPostMediaCorretiva(dataPhotos)),
+    };
+    conditionalsToSendPhotos[tipoServico]();
+  };
+
+  const successPostMedia = postMediaPreventiva.status === "success" || postMediaCorretiva.status === "success"
 
   return (
     <>
-      {toggleTakePhoto && (
-        <BaseLayout>
-          <strong>Você pode tirar até 4 fotos para finalizar o serviço</strong>
-        </BaseLayout>
-      )}
       {toggleTakePhoto && <TakePhoto cb={getBlobPhoto} />}
       {!toggleTakePhoto && (
         <BaseLayout>
-          {postMediaPreventiva.status !== "success" && (
+          {!successPostMedia && (
             <>
               <PhotosList photos={photos} removePhoto={removePhoto} />
               <p className="paragraph paragraph--sm color-negative">
@@ -57,8 +63,8 @@ const FinalizarServico = () => {
               </p>
             </>
           )}
-          {postMediaPreventiva.status === "success" && <Comment />}
-          {postMediaPreventiva.status !== "success" && (
+          {successPostMedia && <Comment />}
+          {!successPostMedia && (
             <nav className="controlls">
               <Button
                 size="sm"

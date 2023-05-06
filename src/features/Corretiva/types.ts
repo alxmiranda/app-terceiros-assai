@@ -1,4 +1,4 @@
-export type IResponseGetPreventiva = {
+export type IResponseGetCorretiva = {
   id: number;
   idTipoEquipamento: number;
   idEquipamento: number;
@@ -43,12 +43,12 @@ export type IResponseGetPreventiva = {
   }>;
 };
 
-export interface IRequestPutIniciarPreventiva {
-  id: string | number;
+export interface IRequestPostIniciarCorretiva {
   etiqueta: string | undefined;
 }
 
-export interface IRequestPostMediaPreventiva {
+
+export interface IRequestPostMediaCorretiva {
   id: string | number | undefined;
   photos: Array<{
     idServico?: number;
@@ -56,28 +56,28 @@ export interface IRequestPostMediaPreventiva {
   }>;
 }
 
-export interface IInitialStateGetPreventiva {
-  preventiva: IResponseGetPreventiva;
+export interface IInitialStateGetCorretiva {
+  preventiva: IResponseGetCorretiva;
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
 
-export interface IInitialStatePutIniciarPreventiva {
+export interface IInitialStatePostIniciarCorretiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
 
-export interface IInitialStatePutMediasPreventiva {
+export interface IInitialStatePutMediasCorretiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
 
-export interface IInitialStatePutFinalizarPreventiva {
+export interface IInitialStatePutFinalizarCorretiva {
   status: "" | "success" | "failed" | "loading";
   feedbackError?: any;
 }
 
-export interface IRequestPutFinalizarPreventiva {
+export interface IRequestPutFinalizarCorretiva {
   id: string | number | undefined;
   etiqueta: string;
   observacoes: string

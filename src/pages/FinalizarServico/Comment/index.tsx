@@ -6,30 +6,34 @@ import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { actionPutFinalizarPreventiva } from "../../../features/Preventiva/FinalizarServico/slices";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/useAppSelector";
+import { actionPutFinalizarCorretiva } from "../../../features/Corretiva/FinalizarServico/slices";
 
 const Comment = () => {
   const [state, setState] = React.useState("");
   const dispatch = useAppDispatch();
   const { putFinalizarPreventiva } = useAppSelector((state) => state);
-  const { idServico, etiqueta }: any = useParams();
-  const navigate = useNavigate()
+  const { idServico, etiqueta, tipoServico }: any = useParams();
+  const navigate = useNavigate();
 
-  const sendComment = () =>
-    dispatch(
-      actionPutFinalizarPreventiva({
-        id: idServico,
-        etiqueta,
-        observacoes: state,
-      })
-    );
-  
+  const sendComment = () => {
+    const data = {
+      id: idServico,
+      etiqueta,
+      observacoes: state,
+    };
+    const conditionalsToFinalizar = {
+      preventiva: () => dispatch(actionPutFinalizarPreventiva(data)),
+      corretiva: () => dispatch(actionPutFinalizarCorretiva(data)),
+    };
+    conditionalsToFinalizar[tipoServico]()
+  };
 
   React.useEffect(() => {
-    if(putFinalizarPreventiva.status === "success") {
-      navigate("/servicos")
+    if (putFinalizarPreventiva.status === "success") {
+      navigate("/servicos");
     }
-  }, [putFinalizarPreventiva.status])
-  
+  }, [putFinalizarPreventiva.status]);
+
   return (
     <div className="comment">
       <div className="mb-10">

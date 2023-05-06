@@ -4,11 +4,12 @@ import { IInitialStateServicos, IRequestGetServicos } from "./types";
 
 export const actionGetServicos: any = createAsyncThunk(
   "GET_SERVICOS",
-  async (params: IRequestGetServicos) => {
+  async ({tipoServico}: IRequestGetServicos) => {
     const data = await servicos({
       dataIni: "2023-04-01",
-      dataFim: "2023-04-30",
+      dataFim: "2023-05-30",
       status: "",
+      tipoServico: tipoServico ?? "preventiva"
     });
     return data;
   }
@@ -31,7 +32,7 @@ const servicosSlice = createSlice({
       state.servicos = data;
     },
     [actionGetServicos.rejected]: (state, payload) => {
-      console.log(payload);
+      ;
       state.status = "failed";
       state.feedbackError = payload.error.message;
     },

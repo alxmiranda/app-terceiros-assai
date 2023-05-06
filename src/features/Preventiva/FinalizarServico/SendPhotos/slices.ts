@@ -9,7 +9,7 @@ export const actionPostMediaPreventiva = createAsyncThunk(
   "POST_MEDIA_PREVENTIVA",
   async (data: IRequestPostMediaPreventiva) => {
     const result = await postMediaPreventiva(data);
-    console.log(result, "<<<");
+    
     return result;
   }
 );
@@ -30,7 +30,7 @@ const postMediaPreventivaSlice = createSlice({
       console.log(Promise.all(payload), "success");
     },
     [`${actionPostMediaPreventiva.rejected}`]: (state, payload) => {
-      console.log(payload)
+      
       state.status = "failed";
       state.feedbackError = payload.error.message;
     },

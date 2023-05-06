@@ -1,12 +1,9 @@
-// .page-reader {
-//   width: 100vw;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   overflow: hidden;
-//   background: #000;
-// }
+@use "../../scss/variables" as variables;
+
+.page-reader {
+  background-color: variables.$backgroundSecondary;
+  height: 100vh;
+}
 
 #reader {
   width: 100vw;

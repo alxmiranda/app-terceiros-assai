@@ -3,20 +3,23 @@ import { ImageCapture } from "image-capture";
 import "./_styles.scss";
 
 const CaptureImg = (refVideo, cb) => {
-  // let mediaStream = null;
   let imageCapture = null as typeof ImageCapture;
+  let videoDevice;
 
   const gotStream = (stream) => {
-    // mediaStream = stream;
+    videoDevice = stream.getVideoTracks()[0];
     refVideo.srcObject = stream;
     refVideo.classList.remove("hidden");
-    imageCapture = new ImageCapture(stream.getVideoTracks()[0]);
+    imageCapture = new ImageCapture(videoDevice);
   };
 
   const mediadevicesInit = () => {
     navigator.mediaDevices
       .getUserMedia({
         video: true
+        // video: {
+        //   facingMode: { exact: "environment" },
+        // },
       })
       .then(gotStream)
       .catch((error) => {
@@ -24,7 +27,7 @@ const CaptureImg = (refVideo, cb) => {
       });
   };
 
-  const OnTakePhoto = () => {
+  const onTakePhoto = () => {
     if (!imageCapture) return null;
 
     imageCapture
@@ -35,10 +38,13 @@ const CaptureImg = (refVideo, cb) => {
       });
   };
 
+  const stopCamera = () => videoDevice.stop();
+
   return {
     gotStream,
     mediadevicesInit,
-    OnTakePhoto,
+    onTakePhoto,
+    stopCamera,
   };
 };
 
@@ -49,6 +55,8 @@ const TakePhoto = ({ cb }) => {
   React.useEffect(() => {
     InstanceTakePhoto = CaptureImg(refVideo.current, cb);
     InstanceTakePhoto.mediadevicesInit();
+
+    return () => InstanceTakePhoto.stopCamera();
   }, []);
 
   return (
@@ -56,7 +64,7 @@ const TakePhoto = ({ cb }) => {
       <video autoPlay={true} playsInline ref={refVideo} />
       <button
         className="btn-take-photo"
-        onClick={() => InstanceTakePhoto.OnTakePhoto()}
+        onClick={() => InstanceTakePhoto.onTakePhoto()}
       />
     </div>
   );

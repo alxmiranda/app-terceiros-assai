@@ -12,6 +12,7 @@
 
 body {
   font-family: variables.$font-primary;
+  min-height: -webkit-fill-available;
 }
 
 img {

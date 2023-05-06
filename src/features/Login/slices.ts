@@ -37,7 +37,7 @@ const loginSlice = createSlice({
       state.user = payload
     },
     [actionGetLogin.rejected]: (state, payload) => {
-      console.log(payload)
+      
       state.status = 'failed'
       state.feedbackError = payload.error.message
     }

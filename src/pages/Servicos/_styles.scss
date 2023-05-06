@@ -1,8 +1,31 @@
 @use "../../scss/functions" as functions;
+@use "../../scss/variables" as variables;
 
 .nav-start-servicos {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
   gap: functions.toRem(10);
-  margin-top: functions.toRem(30);
+  
+  a {
+    width: 50%;
+    padding: 0 functions.toRem(18);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-direction: column;
+    color: variables.$primaryA;
+    background: variables.$backgroundTertiary;
+
+    svg {
+      font-size: functions.toRem(22);
+    }
+    span {
+      color: variables.$primaryA;
+      font-size: functions.toRem(12);
+      letter-spacing: functions.toRem(0.8);;
+    }
+  }
 }

@@ -1,3 +1,5 @@
+@use "../../../scss/variables" as variables;
+
 .frame-video {
   height: 100vh;
   display: flex;
@@ -32,7 +34,6 @@
 
   video {
     width: 100vw;
-    border: 1px solid black;
     img{
       display: none;
     }

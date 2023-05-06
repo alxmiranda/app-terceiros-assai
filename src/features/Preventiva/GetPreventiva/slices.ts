@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import getPreventiva from "./services";
+import getPreventivaByEtiqueta from "./services";
 import { IInitialStateGetPreventiva } from "../types";
 
 export const actionGetPreventiva: any = createAsyncThunk(
   "GET_PREVENTIVA",
   async (etiqueta: string) => {
-    const data = await getPreventiva(etiqueta);
+    const data = await getPreventivaByEtiqueta(etiqueta);
     return data;
   }
 );

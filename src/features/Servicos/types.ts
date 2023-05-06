@@ -2,10 +2,12 @@ export interface IRequestGetServicos {
   dataIni: string;
   dataFim: string;
   status: string;
+  tipoServico:string;
 }
 
 export type IResponseGetServicos = {
   id: number;
+  tipo: string,
   idTipoEquipamento: number;
   idEquipamento: number;
   idUsuarioTerceiro: number;
