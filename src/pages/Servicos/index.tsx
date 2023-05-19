@@ -1,8 +1,6 @@
-import React from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { actionGetServicos } from "../../features/Servicos/slices";
 import BaseLayout from "../../components/BaseLayout";
-import { useAppSelector } from "../../hooks/useAppSelector";
 import ListServicos from "./ListServicos";
 import "./_styles.scss";
 import { Link } from "react-router-dom";
@@ -11,10 +9,8 @@ import Select from "../../components/Select";
 
 const PageServicos = () => {
   const dispatch = useAppDispatch();
-  
-  const onChange = (ev) => {
-    dispatch(actionGetServicos({ tipoServico: ev.target.value }));
-  };
+
+  const onChange = (ev) => dispatch(actionGetServicos({ tipoServico: ev.target.value }));
 
   return (
     <BaseLayout>

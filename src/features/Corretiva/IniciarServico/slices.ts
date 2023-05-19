@@ -8,7 +8,6 @@ import postIniciarCorretiva from "./services";
 export const actionPostInciarCorretiva = createAsyncThunk(
   "POST_INICIAR_CORRETIVA",
   async (props: IRequestPostIniciarCorretiva) => {
-    console.log("here")
     const data = await postIniciarCorretiva(props);
     return data;
   }

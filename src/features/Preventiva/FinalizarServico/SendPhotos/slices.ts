@@ -27,7 +27,7 @@ const postMediaPreventivaSlice = createSlice({
     },
     [`${actionPostMediaPreventiva.fulfilled}`]: (state, { payload }) => {
       state.status = "success";
-      console.log(Promise.all(payload), "success");
+      console.log(payload)
     },
     [`${actionPostMediaPreventiva.rejected}`]: (state, payload) => {
       

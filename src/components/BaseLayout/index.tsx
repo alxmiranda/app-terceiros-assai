@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
-import { BsCardList, BsCamera } from "react-icons/bs";
 import Button from "../Button";
 import "./_styles.scss";
 import { logout } from "../../helpers/user";
+import MessagesCenter from "./MessagesCenter";
 interface IProps {
   children: any;
   noPadding?: boolean;
@@ -34,24 +33,7 @@ const BaseLayout = ({ children, noPadding = false }: IProps) => {
           </section>
         </div>
       )}
-      {/* <nav className="base-layout__nav">
-        <div className="container">
-          <div className="row">
-            <div className="col-6">
-              <Link to="/">
-                <BsCardList />
-                <span>serviços</span>
-              </Link>
-            </div>
-            <div className="col-6">
-              <Link to="/">
-                <BsCamera />
-                <span>iniciar serviço</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav> */}
+      <MessagesCenter />
     </main>
   );
 };

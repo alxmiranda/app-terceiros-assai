@@ -1,0 +1,57 @@
+@use "./../../scss/variables" as variables;
+@use "./../../scss/functions" as functions;
+
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0%);
+    opacity: 1;
+  }
+}
+
+.alert {
+  width: 80%;
+  position: fixed;
+  top: 85%;
+  left: 50%;
+  opacity: 0;
+  transform: translateX(-50%) translateY(0%);
+  padding: functions.toRem(10);
+  border-left: 4px solid;
+  border-radius: functions.toRem(4);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: white;
+
+  &.fade-in {
+    animation: fadeIn .8s forwards;
+  }
+
+  &.fade-out {
+    animation: fadeIn .4s reverse 3s forwards;
+  }
+}
+
+.alert__icon {
+  display: flex;
+}
+
+.alert--success {
+  border-left-color: variables.$borderPositive;
+  background: variables.$backgroundPositive;
+}
+
+.alert--error {
+  border-left-color: variables.$borderNegative;
+  background: variables.$backgroundNegative;
+}
+
+.alert--warning {
+  border-left-color: variables.$borderWarning;
+  background: variables.$backgroundWarning;
+}
