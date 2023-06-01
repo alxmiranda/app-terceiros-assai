@@ -7,13 +7,6 @@ import CapturarQRCode from "./pages/CapturarQRCode";
 import RealizarServico from "./pages/RealizarServico";
 import FinalizarServico from "./pages/FinalizarServico";
 
-// /,
-// /servicos,
-// /iniciar/:tipoServico/:etiqueta
-// /iniciar/capturar-qrcode/:tipoServico,
-// /finalizar/:tipoServico/:idServico/:etiqueta
-// /finalizar/capturar-qrcode/:tipoServico/:idServico
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,7 +21,7 @@ const router = createBrowserRouter([
     element: <RealizarServico />,
   },
   {
-    path: "iniciar/capturar-qrcode/:tipoServico",
+    path: "/iniciar/capturar-qrcode/:tipoServico",
     element: <CapturarQRCode />,
   },
   {
@@ -39,30 +32,6 @@ const router = createBrowserRouter([
     path: "/finalizar/capturar-qrcode/:tipoServico/:idServico",
     element: <CapturarQRCode />,
   },
-  // {
-  //   path: "/",
-  //   element: <PageLogin />,
-  // },
-  // {
-  //   path: "/servicos",
-  //   element: <PageServicos />
-  // },
-  // {
-  //   path: "/capturar-qrcode/:tipoServico",
-  //   element: <CapturarQRCode />
-  // },
-  //   {
-  //   path: "/capturar-qrcode/:tipoServico/:idServico",
-  //   element: <CapturarQRCode />
-  // },
-  // {
-  //   path: "/realizar-servico/:tipoServico/:etiqueta",
-  //   element: <RealizarServico />
-  // },
-  // {
-  //   path: "/finalizar-servico/:tipoServico/:idServico/:etiqueta",
-  //   element: <FinalizarServico />
-  // }
 ]);
 
 const App = () => <RouterProvider router={router} />;

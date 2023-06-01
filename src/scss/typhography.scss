@@ -39,6 +39,7 @@ $map-label: "sm" 14 16, "md" 16 20, "lg" 18 24;
 input,
 textarea {
   @include mixins.font-base-label;
+  color: variables.$contentSecondary;
 }
 
 @each $sufix, $size, $line-height in $map-label {

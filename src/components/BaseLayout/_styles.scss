@@ -1,15 +1,9 @@
 @use "../../scss/functions" as functions;
 @use "../../scss/variables" as variables;
 
-
-// body {
-//   height: 100vh;
-//   overflow: hidden;
-// }
-
 .base-layout__header {
-  height: 40px;
-  background: variables.$backgroundSecondary;
+  height: 60px;
+  // background: variables.$backgroundSecondary;
   display: flex;
   align-items: center;
   .avatar {
@@ -25,9 +19,6 @@
 
 .base-layout__content {
   padding: functions.toRem(20) 0;
-  // height: calc(88vh - 100px);
-  // overflow: hidden;
-  // overflow-y: auto;
 }
 
 .base-layout__nav {

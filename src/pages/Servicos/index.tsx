@@ -10,7 +10,8 @@ import Select from "../../components/Select";
 const PageServicos = () => {
   const dispatch = useAppDispatch();
 
-  const onChange = (ev) => dispatch(actionGetServicos({ tipoServico: ev.target.value }));
+  const onChange = (ev) =>
+    dispatch(actionGetServicos({ tipoServico: ev.target.value }));
 
   return (
     <BaseLayout>
@@ -24,22 +25,18 @@ const PageServicos = () => {
           <span>Iniciar Corretiva</span>
         </Link>
       </nav>
-      <div className="row">
-        <div className="col-6">
-          <h2 className="heading--sm">Serviços</h2>
-        </div>
-        <div className="col-6">
-          <Select
-            onChange={onChange}
-            size="sm"
-            label="Escolha o tipo de seriço"
-            options={[
-              { value: "preventiva", children: "preventiva" },
-              { value: "corretiva", children: "corretiva" },
-            ]}
-          />
-        </div>
-      </div>
+
+      <Select
+        onChange={onChange}
+        size="sm"
+        label="Escolha o tipo de seriço"
+        options={[
+          { value: "preventiva", children: "preventiva" },
+          { value: "corretiva", children: "corretiva" },
+        ]}
+      />
+      
+      <h2 className="heading--sm">Serviços</h2>
       <ListServicos />
     </BaseLayout>
   );

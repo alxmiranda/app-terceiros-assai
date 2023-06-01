@@ -1,10 +1,11 @@
 import React from "react";
-import Button, { Link } from "../../../components/Button";
-import { IResponseGetServicos } from "../../../features/Servicos/types";
+import { Link } from "../../../components/Button";
 import { useAppDispatch } from "../../../hooks/useAppDispatch";
 import { useAppSelector } from "../../../hooks/useAppSelector";
 import "./_styles.scss";
 import { actionGetServicos } from "../../../features/Servicos/slices";
+import transformDate from "../../../helpers/transform-date";
+import { BsThreeDots } from "react-icons/bs";
 
 const ListServicos = () => {
   const dispatch = useAppDispatch();
@@ -48,95 +49,98 @@ const ListServicos = () => {
           <div className="card-servico">
             <div className="card-servico__content">
               <header>
-                <div>
-                  <div className="mb-10">
-                    <h2 className="heading heading--sm">
-                      Equipamento: {tipoEquipamento.nome}
-                    </h2>
-                    <p className="paragraph paragraph--sm color-tertiary">
-                      {tipoEquipamento.descricao}
-                    </p>
+                <button className="btn-detail">
+                  <BsThreeDots />
+                </button>
+                <div className="container-fluid mt-10">
+                  <div className="row">
+                    <div className="col-8">
+                      <p className="paragraph paragraph--lg color-white">
+                        {tipoEquipamento.nome}
+                      </p>
+                      <p className="paragraph paragraph--sm color-white">
+                        {tipoEquipamento.descricao}
+                      </p>
+                    </div>
+                    <div className="col-4 status">
+                      <p className="paragraph paragraph--sm color-white">
+                        {status}
+                      </p>
+                    </div>
                   </div>
-                  <p className="paragraph paragraph--sm mb-10 color-secondary">
-                    <strong>Assiduidade:</strong> {assiduidade}
-                  </p>
-                  <p className="paragraph paragraph--sm mb-10 color-secondary">
-                    <strong>Status:</strong> {status}
-                  </p>
-                  <p className="paragraph paragraph--sm mb-10 color-secondary">
-                    <strong>Tipo:</strong> {tipo}
-                  </p>
-                  <p className="paragraph paragraph--sm mb-10 color-secondary">
-                    <strong>Programado em:</strong> {dataProgramada}
-                  </p>
-                  <p className="paragraph paragraph--sm mb-10 color-secondary">
-                    <strong>Iniciado em:</strong> {dataInicio}
-                  </p>
-                  {dataFim && (
-                    <p className="paragraph paragraph--sm color-secondary">
-                      <strong>Finalizado em:</strong> {dataInicio}
-                    </p>
-                  )}
                 </div>
               </header>
               <article>
-                <div className="mb-10">
-                  <p className="paragraph paragraph--sm color-secondary">
-                    <strong>Observações:</strong> {observacoes}
-                  </p>
-                </div>
-                <div className="mb-10">
-                <p className="paragraph paragraph--sm color-secondary">
-                    <strong>Local: </strong> {local.nome}
-                  </p>
-                </div>
-              </article>
-              <div className="footer">
-                {status === "iniciada" && (
-                  <div className="row mt-10">
-                    <div className="col-6">
-                      <Link
-                        size="sm"
-                        variant="secondary"
-                        to={`/finalizar/capturar-qrcode/${tipo}/${id}`}
-                      >
-                        Finalizar Serviço
-                      </Link>
+                <div className="container-fluid">
+                  <div className="row mb-20">
+                    <div className="col-4">
+                      <div className="label">
+                        <p className="paragraph">Assiduidade</p>
+                        <p className="paragraph">{assiduidade}</p>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="label">
+                        <p className="paragraph">Tipo</p>
+                        <p className="paragraph">{tipo}</p>
+                      </div>
                     </div>
                   </div>
-                )}
-              </div>
+
+                  <div className="row mb-20">
+                    <div className="col-4">
+                      <div className="label">
+                        <p className="paragraph">Prrogramado</p>
+                        <p className="paragraph">
+                          {transformDate(dataProgramada)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div className="label">
+                        <p className="paragraph">Iniciado</p>
+                        <p className="paragraph">{transformDate(dataInicio)}</p>
+                      </div>
+                    </div>
+
+                    <div className="col-4">
+                      <div className="label">
+                        <p className="paragraph">Finalizado</p>
+                        <p className="paragraph">{transformDate(dataFim)}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="label">
+                        <p className="paragraph">Observações</p>
+                        <p className="paragraph">{observacoes}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              {status === "iniciada" && (
+                <footer>
+                  <div className="container-fluid">
+                    <div className="row">
+                      <div className="col-6 action">
+                        <Link
+                          size="sm"
+                          variant="secondary"
+                          to={`/finalizar/capturar-qrcode/${tipo}/${id}`}
+                        >
+                          Finalizar Serviço
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </footer>
+              )}
             </div>
           </div>
-
-          // <article className="list__item">
-          //   <div className="container">
-          //     <div className="row">
-          //       <div className="info col-12">
-          //         <p className={`paragraph--sm color-secondary`}>
-          //           <strong>{status}</strong>
-          //         </p>
-          //         <p className="paragraph--sm color-secondary">
-          //           <strong>Equipamento: </strong> {nome}
-          //         </p>
-          //         <p className="paragraph--sm color-secondary">{descricao}</p>
-          //       </div>
-          //     </div>
-          //     {status === "iniciada" && (
-          //       <div className="row mt-10">
-          //         <div className="col-6">
-          //           <Link
-          //             size="sm"
-          //             variant="secondary"
-          //             to={`/finalizar/capturar-qrcode/${tipo}/${id}`}
-          //           >
-          //             Finalizar Serviço
-          //           </Link>
-          //         </div>
-          //       </div>
-          //     )}
-          //   </div>
-          // </article>
         )
       )}
     </div>
